@@ -8,6 +8,15 @@
         "zfcuser"
     ],
     "homepage": "https://github.com/goalio/GoalioForgotPassword",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@gitlab.di.lv:DIVI/divi-mail.git",
+            "trunk-path": "trunk",
+            "branches-path": "branches",
+            "tags-path": "tags"
+        }
+    ],
     "authors": [
         {
             "name": "Philipp Dobrigkeit",
@@ -16,7 +25,7 @@
         }
     ],
     "require": {
-        "goalio/goalio-mailservice": "^3.0",
+        "divi/divi-mail": "^1.0"
         "zf-commons/zfc-user": "4.*"
     },
     "autoload": {
