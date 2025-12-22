@@ -1,6 +1,7 @@
 <?php
 namespace GoalioForgotPassword\Form\Service;
 
+use Eye4web\SiteConfig\Service\SiteConfigService;
 use GoalioForgotPassword\Form\Reset;
 use GoalioForgotPassword\Form\ResetFilter;
 use Laminas\ServiceManager\ServiceLocatorInterface;
@@ -13,12 +14,26 @@ class ResetFactory implements FactoryInterface {
         $options = $container->get('goalioforgotpassword_module_options');
         $config = $container->get('config');
         $form = new Reset(null, $options);
+
+        $additionalConfig = $config['zfcuser'];
+        $siteConfigService = null;
+        
+        $configForFilter = [];
+        $configForFilter['minPasswordLength'] = 6;
+        if(isset($config['zfcuser']['minPasswordLength'])){
+            $configForFilter['minPasswordLength'] = $config['zfcuser']['minPasswordLength'];
+        }
+        
+        if ($container->has(SiteConfigService::class)) {
+            $additionalConfig = $container->get(SiteConfigService::class);
+            $configForFilter['minPasswordLength'] = $siteConfigService->get('minPasswordLength');
+        }
         $form->setInputFilter(new ResetFilter($options,
                 new PasswordIsValid(
                     $container->get('zfcuser_module_options'),
-                    $config['zfcuser']
+                    $additionalConfig
                 ),
-                $config['zfcuser'],                               
+                $configForFilter,                               
              ));
         return $form;
     }
