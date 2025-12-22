@@ -26,7 +26,7 @@ class ResetFactory implements FactoryInterface {
         
         if ($container->has(SiteConfigService::class)) {
             $additionalConfig = $container->get(SiteConfigService::class);
-            $configForFilter['minPasswordLength'] = $siteConfigService->get('minPasswordLength');
+            $configForFilter['minPasswordLength'] = $additionalConfig->get('minPasswordLength');
         }
         $form->setInputFilter(new ResetFilter($options,
                 new PasswordIsValid(
