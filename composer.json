@@ -25,8 +25,8 @@
         }
     ],
     "require": {
-        "divi/divi-mail": "^1.0",
-        "zf-commons/zfc-user": "4.* || 5.*"
+        "divi/divi-mail": "^1.0.6",
+        "zf-commons/zfc-user": "dev-I-51993"
     },
     "autoload": {
         "psr-0": {
