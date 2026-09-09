@@ -18,14 +18,18 @@ class Password
     {
         return $this->requestKey;
     }
-
+    
+    /**
+     * Generate the password reset token.
+     *
+     * The token is a bearer credential and must be unpredictable.
+     *
+     * 16 CSPRNG bytes render as 32 hex characters, which is exactly the width
+     * of the request_key column (varchar(32), PRIMARY KEY).
+     */
     public function generateRequestKey()
     {
-        $this->setRequestKey(strtoupper(substr(sha1(
-            $this->getUserId() .
-            '####' .
-            $this->getRequestTime()->getTimestamp()
-        ),0,15)));
+        $this->setRequestKey(strtoupper(bin2hex(random_bytes(16))));
     }
 
     public function setUserId($user_id)
