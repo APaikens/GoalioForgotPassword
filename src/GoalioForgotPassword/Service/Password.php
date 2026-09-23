@@ -9,8 +9,11 @@ use GoalioForgotPassword\Options\ForgotOptionsInterface;
 use ZfcUser\Mapper\UserInterface as UserMapperInterface;
 use GoalioForgotPassword\Mapper\Password as PasswordMapper;
 
-use Laminas\Crypt\Password\Bcrypt;
 use ZfcUser\EventManager\EventProvider;
+
+use function password_hash;
+
+use const PASSWORD_BCRYPT;
 
 class Password extends EventProvider
 {
@@ -93,10 +96,7 @@ class Password extends EventProvider
     {
         $newPass = $data['newCredential'];
 
-        $bcrypt = new Bcrypt;
-        $bcrypt->setCost($this->getZfcUserOptions()->getPasswordCost());
-
-        $pass = $bcrypt->create($newPass);
+        $pass = password_hash($newPass, PASSWORD_BCRYPT, ['cost' => $this->getZfcUserOptions()->getPasswordCost()]);
         $user->setPassword($pass);
 
         $this->getUserMapper()->update($user);
