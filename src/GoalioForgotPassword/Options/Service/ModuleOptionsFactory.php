@@ -7,7 +7,7 @@ use Laminas\ServiceManager\FactoryInterface;
 
 class ModuleOptionsFactory implements FactoryInterface {
 
-    public function __invoke(\Interop\Container\ContainerInterface $container, $requestedName, array $options = NULL) {
+    public function __invoke(\Interop\Container\ContainerInterface $container, $requestedName, ?array $options = null) {
         $config = $container->get('Config');
         return new ModuleOptions(isset($config['goalioforgotpassword']) ? $config['goalioforgotpassword'] : array());
     }

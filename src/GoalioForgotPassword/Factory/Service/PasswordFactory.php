@@ -14,7 +14,7 @@ use GoalioForgotPassword\Service\Password;
  */
 class PasswordFactory implements FactoryInterface{
         
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = NULL) {
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null) {
         $controller = new Password(
                 $container->get('goalioforgotpassword_module_options'),
                 $container->get('goalioforgotpassword_password_mapper'),

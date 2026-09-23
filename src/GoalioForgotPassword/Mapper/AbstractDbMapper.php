@@ -105,7 +105,7 @@ abstract class AbstractDbMapper
      * @param HydratorInterface|null $hydrator
      * @return HydratingResultSet
      */
-    protected function select(Select $select, $entityPrototype = null, HydratorInterface $hydrator = null)
+    protected function select(Select $select, $entityPrototype = null, ?HydratorInterface $hydrator = null)
     {
         $this->initialize();
 
@@ -124,7 +124,7 @@ abstract class AbstractDbMapper
      * @param HydratorInterface|null $hydrator
      * @return ResultInterface
      */
-    protected function insert($entity, $tableName = null, HydratorInterface $hydrator = null)
+    protected function insert($entity, $tableName = null, ?HydratorInterface $hydrator = null)
     {
         $this->initialize();
         $tableName = $tableName ?: $this->tableName;
@@ -147,7 +147,7 @@ abstract class AbstractDbMapper
      * @param HydratorInterface|null $hydrator
      * @return ResultInterface
      */
-    protected function update($entity, $where, $tableName = null, HydratorInterface $hydrator = null)
+    protected function update($entity, $where, $tableName = null, ?HydratorInterface $hydrator = null)
     {
         $this->initialize();
         $tableName = $tableName ?: $this->tableName;
@@ -324,7 +324,7 @@ abstract class AbstractDbMapper
      * @param HydratorInterface|null $hydrator
      * @return array
      */
-    protected function entityToArray($entity, HydratorInterface $hydrator = null)
+    protected function entityToArray($entity, ?HydratorInterface $hydrator = null)
     {
         if (is_array($entity)) {
             return $entity; // cut down on duplicate code
