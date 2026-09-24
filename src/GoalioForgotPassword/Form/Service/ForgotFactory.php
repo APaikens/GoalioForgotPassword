@@ -8,7 +8,7 @@ use Laminas\ServiceManager\FactoryInterface;
 
 class ForgotFactory implements FactoryInterface {
 
-    public function __invoke(\Interop\Container\ContainerInterface $container, $requestedName, array $options = NULL) {
+    public function __invoke(\Interop\Container\ContainerInterface $container, $requestedName, ?array $options = null) {
         $options = $container->get('goalioforgotpassword_module_options');
         $form = new Forgot(null, $options);
         $validator = new \ZfcUser\Validator\RecordExists(array(

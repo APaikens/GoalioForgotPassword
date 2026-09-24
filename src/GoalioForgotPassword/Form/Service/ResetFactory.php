@@ -10,7 +10,7 @@ use DiviUser\Validator\PasswordIsValid;
 
 class ResetFactory implements FactoryInterface {
 
-    public function __invoke(\Interop\Container\ContainerInterface $container, $requestedName, array $options = NULL) {
+    public function __invoke(\Interop\Container\ContainerInterface $container, $requestedName, ?array $options = null) {
         $options = $container->get('goalioforgotpassword_module_options');
         $config = $container->get('config');
         $form = new Reset(null, $options);

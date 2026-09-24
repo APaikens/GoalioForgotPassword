@@ -9,7 +9,7 @@ use Interop\Container\ContainerInterface;
 
 class PasswordFactory implements FactoryInterface {
 
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = NULL) {
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null) {
         $options = $container->get('goalioforgotpassword_module_options');
         $mapper = new Password();
         $mapper->setDbAdapter($container->get('zfcuser_zend_db_adapter'));
