@@ -27,10 +27,17 @@ return array(
         'routes' => array(
             'zfcuser' => array(
                 'child_routes' => array(
+                    // Segment (was Literal) so the optional [/:language] bracket syntax
+                    // is supported - a consuming project's own Db-user module (e.g.
+                    // DiviUser) loads after this one, so it can still override these
+                    // same keys further if it needs a narrower language set.
                     'forgotpassword' => array(
-                        'type' => 'Literal',
+                        'type' => 'Segment',
                         'options' => array(
-                            'route' => '/forgot-password',
+                            'route' => '[/:language]/forgot-password',
+                            'constraints' => array(
+                                'language' => 'lv|en|ru|lt|ee',
+                            ),
                             'defaults' => array(
                                 'controller' => 'goalioforgotpassword_forgot',
                                 'action'     => 'forgot',
@@ -40,12 +47,13 @@ return array(
                     'resetpassword' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => '/reset-password/:userId/:token',
+                            'route' => '[/:language]/reset-password/:userId/:token',
                             'defaults' => array(
                                 'controller' => 'goalioforgotpassword_forgot',
                                 'action'     => 'reset',
                             ),
                             'constraints' => array(
+                                'language' => 'lv|en|ru|lt|ee',
                                 'userId'  => '[A-Fa-f0-9]+',
                                 'token' => '[A-F0-9]+',
                             ),
